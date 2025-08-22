@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "titulo_livro": "Trono de vidro",
+        "autor_livro": "Leth",
+        "ano_publi_livro": 2020,
+        "quantidade_disp_estoque": 10
+    },
+    {
+        "id": 2,
+        "titulo_livro": "Harry potter",
+        "autor_livro": "Maria",
+        "ano_publi_livro": 2000,
+        "quantidade_disp_estoque": 45
+    },
+    {
+        "id": 3,
+        "titulo_livro": "Lovecraft",
+        "autor_livro": "Jack",
+        "ano_publi_livro": 2015,
+        "quantidade_disp_estoque": 35
+    }
+]

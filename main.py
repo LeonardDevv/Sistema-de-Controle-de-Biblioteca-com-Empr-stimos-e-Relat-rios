@@ -33,7 +33,7 @@ def cadastrar_livro():
     quantidade_disp_estoque = int(input("Informe a quantidade disponível em estoque do livro: "))
 
     livro = {
-        "id": id,
+        "livro_id": id,
         "titulo_livro": titulo_livro,
         "autor_livro": autor_livro,
         "ano_publi_livro": ano_publi_livro,
@@ -65,7 +65,7 @@ def cadastrar_usuario():
     email_usuario = input("Informe o email do autor do usuario: ")
 
     usuario = {
-        "id": id,
+        "usuario_id": id,
         "nome_usuario": nome_usuario,
         "email_usuario": email_usuario,
     }
@@ -79,13 +79,33 @@ def cadastrar_usuario():
         print("Erro ao salvar os dados: {e}")
 
 
+
+def emprestimo():
+    global livros
+    print(f"{'=' * 30} \nLivros em estoque:\n")
+
+    for livro in livros:
+        print(f"Livro número: {livro['livro_id']} \nTítulo do livro: {livro['titulo_livro']} \nAutor do livro: {livro['autor_livro']} \nAno de publicação do livro: {livro['ano_publi_livro']} \nQuantidade em estoque: {livro['quantidade_disp_estoque']} \n{'-' * 30}")
+        
+    print(f"{'=' * 30}")
+    livro_emprestado = int(input("Informe o número do livro que você deseja pegar emprestado: "))
+    
+    
+
+
 def iniciar():
     while True:
-        inicio = int(input("Escolha uma opção: \n[ 1 ] - Cadastrar novo livro \n[ 2 ] - Cadastrar usuario\n"))
+        inicio = int(input("Escolha uma opção: \n[ 1 ] - Cadastrar novo livro \n[ 2 ] - Cadastrar usuario\n[ 3 ] - Pegar livro emprestado \n"))
 
         if inicio == 1:
             cadastrar_livro()
         elif inicio == 2:
             cadastrar_usuario()
+        elif inicio == 3:
+            emprestimo()
+
+
+
+
 
 iniciar()

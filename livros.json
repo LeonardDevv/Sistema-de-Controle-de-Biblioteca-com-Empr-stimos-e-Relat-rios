@@ -19,5 +19,12 @@
         "autor_livro": "Jack",
         "ano_publi_livro": 2015,
         "quantidade_disp_estoque": 35
+    },
+    {
+        "livro_id": 4,
+        "titulo_livro": "Mindset",
+        "autor_livro": "Carol S. Dweck",
+        "ano_publi_livro": 2006,
+        "quantidade_disp_estoque": 45
     }
 ]

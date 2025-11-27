@@ -58,7 +58,7 @@ def cadastrar_usuario():
     if len(usuarios) == 0:
         id = 1
     else:
-        id = max(usuario['id'] for usuario in usuarios) + 1 
+        id = max(usuario['usuario_id'] for usuario in usuarios) + 1 
 
     nome_usuario = input("Informe o nome do usuario: ")
     email_usuario = input("Informe o email do autor do usuario: ")
@@ -76,9 +76,9 @@ def cadastrar_usuario():
             json.dump(usuarios, f, ensure_ascii=False, indent=4)
     except Exception as e:
         print("Erro ao salvar os dados: {e}")
+    
 
-
-def emprestimo():
+def pegar_livro_emprestado():
     global livros
     print(f"{'=' * 30} \nLivros em estoque:\n")
 
@@ -87,7 +87,18 @@ def emprestimo():
         
     print(f"{'=' * 30}")
     livro_emprestado = int(input("Informe o número do livro que você deseja pegar emprestado: "))
-    
+
+    for livro in livros:
+        if livro["livro_id"] == livro_emprestado:
+            if livro["quantidade_disp_estoque"] > 0:
+                livro["quantidade_disp_estoque"] -= 1
+                print(f"Você pegou emprestado o livro: {livro['titulo_livro']}")
+                with open('livros.json', 'w', encoding='utf8') as f:
+                    json.dump(livros, f, ensure_ascii=False, indent=4)
+            else:
+                print("Desculpe, este livro não está disponível no momento.")
+            break
+
     
 def iniciar():
     while True:
@@ -98,17 +109,14 @@ def iniciar():
         elif inicio == 2:
             cadastrar_usuario()
         elif inicio == 3:
-            emprestimo()
+            pegar_livro_emprestado()
         elif inicio == 4:
             print("Sistema encerrado...")
             break
         elif inicio != 1 and inicio != 2 and inicio != 3 and inicio != 4:
             print("Opção inválida, tente novamente.")
-
-
-
-# TODO: Incluir a função de pegar livro emprestado
-
+    
+    
 
 
 iniciar()

@@ -49,7 +49,7 @@ def cadastrar_livro():
         with open('livros.json', 'w', encoding='utf8') as f:
             json.dump(livros, f, ensure_ascii=False, indent=4)
     except Exception as e:
-        print("Erro ao salvar os dados: {e}")
+        print(f"Erro ao salvar os dados: {e}")
 
 
 def cadastrar_usuario():
@@ -67,6 +67,7 @@ def cadastrar_usuario():
         "usuario_id": id,
         "nome_usuario": nome_usuario,
         "email_usuario": email_usuario,
+        "livros_emprestados": []
     }
 
     usuarios.append(usuario)
@@ -75,11 +76,12 @@ def cadastrar_usuario():
         with open('usuarios.json', 'w', encoding='utf8') as f:
             json.dump(usuarios, f, ensure_ascii=False, indent=4)
     except Exception as e:
-        print("Erro ao salvar os dados: {e}")
+        print(f"Erro ao salvar os dados: {e}")
     
 
 def pegar_livro_emprestado():
     global livros
+    global usuarios
     print(f"{'=' * 30} \nLivros em estoque:\n")
 
     for livro in livros:
@@ -87,17 +89,31 @@ def pegar_livro_emprestado():
         
     print(f"{'=' * 30}")
     livro_emprestado = int(input("Informe o número do livro que você deseja pegar emprestado: "))
+    usuario_imprestimo = int(input("Informe o seu número de usuário: "))
 
     for livro in livros:
         if livro["livro_id"] == livro_emprestado:
             if livro["quantidade_disp_estoque"] > 0:
                 livro["quantidade_disp_estoque"] -= 1
-                print(f"Você pegou emprestado o livro: {livro['titulo_livro']}")
+                print(f"\n\nVocê pegou emprestado o livro: {livro['titulo_livro']}")
                 with open('livros.json', 'w', encoding='utf8') as f:
                     json.dump(livros, f, ensure_ascii=False, indent=4)
+
+
+            # TODO: Atualizar o for abaixo para implementar para adicionar o livro à lista de livros emprestados do usuário no arquivo usuarios.json, informando o nome do livro e e quantidade de livros emprestados.        
+            for usuario in usuarios:
+                if usuario["usuario_id"] == usuario_imprestimo:
+                    print(f"Empréstimo realizado para o usuário: {usuario['nome_usuario']}")
+                    usuario["livros_emprestados"].append(livro_emprestado)
+                    with open('usuarios.json', 'w', encoding='utf8') as f:
+                        json.dump(usuarios, f, ensure_ascii=False, indent=4)
+                        break
             else:
                 print("Desculpe, este livro não está disponível no momento.")
             break
+    
+
+    
 
     
 def iniciar():

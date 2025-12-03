@@ -82,39 +82,9 @@ def cadastrar_usuario():
 def pegar_livro_emprestado():
     global livros
     global usuarios
-    print(f"{'=' * 30} \nLivros em estoque:\n")
-
-    for livro in livros:
-        print(f"Livro número: {livro['livro_id']} \nTítulo do livro: {livro['titulo_livro']} \nAutor do livro: {livro['autor_livro']} \nAno de publicação do livro: {livro['ano_publi_livro']} \nQuantidade em estoque: {livro['quantidade_disp_estoque']} \n{'-' * 30}")
-        
-    print(f"{'=' * 30}")
-    livro_emprestado = int(input("Informe o número do livro que você deseja pegar emprestado: "))
-    usuario_imprestimo = int(input("Informe o seu número de usuário: "))
-
-    for livro in livros:
-        if livro["livro_id"] == livro_emprestado:
-            if livro["quantidade_disp_estoque"] > 0:
-                livro["quantidade_disp_estoque"] -= 1
-                print(f"\n\nVocê pegou emprestado o livro: {livro['titulo_livro']}")
-                with open('livros.json', 'w', encoding='utf8') as f:
-                    json.dump(livros, f, ensure_ascii=False, indent=4)
-
-
-            # TODO: Atualizar o for abaixo para implementar para adicionar o livro à lista de livros emprestados do usuário no arquivo usuarios.json, informando o nome do livro e e quantidade de livros emprestados.        
-            for usuario in usuarios:
-                if usuario["usuario_id"] == usuario_imprestimo:
-                    print(f"Empréstimo realizado para o usuário: {usuario['nome_usuario']}")
-                    usuario["livros_emprestados"].append(livro_emprestado)
-                    with open('usuarios.json', 'w', encoding='utf8') as f:
-                        json.dump(usuarios, f, ensure_ascii=False, indent=4)
-                        break
-            else:
-                print("Desculpe, este livro não está disponível no momento.")
-            break
     
 
     
-
     
 def iniciar():
     while True:
@@ -133,6 +103,4 @@ def iniciar():
             print("Opção inválida, tente novamente.")
     
     
-
-
 iniciar()
